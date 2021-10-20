@@ -81,6 +81,7 @@ class SMSService {
         );
     }
 
+
     /**
      * Forward Incoming SMS list
      *
@@ -93,6 +94,8 @@ class SMSService {
         var forward_url = await getFromStorage('forward_url');
         var secret_key = await getFromStorage('secret_key');
         var select_sql = "SELECT * FROM smsin WHERE successful=0 OR successful is null";
+
+        console.log(select_sql);
 
         db.transaction(function (txn) {
 

@@ -115,10 +115,11 @@ function Settings(props) {
 
     async function fetchData() {
 
+      
       setLoading(1);
-
-      await createSettingTable()
-
+      
+      await createSettingTable() 
+      
       var forward_url = await getFromStorage('forward_url', '');
       var secret_key = await getFromStorage('secret_key', '');
       var in_out_str = await getFromStorage('in_out', true);
@@ -128,6 +129,7 @@ function Settings(props) {
       var forward_list_str = await getFromStorage('forward_list', false);
       var ignore_list_str = await getFromStorage('ignore_list', true);
 
+      
       var in_out = (in_out_str=='true')?true:false;
       var in_coming = (in_coming_str=='true')?true:false;
       var out_going = (out_going_str=='true')?true:false;
@@ -135,6 +137,13 @@ function Settings(props) {
       var forward_list = (forward_list_str=='true')?true:false;
       var ignore_list = (ignore_list_str=='true')?true:false;
 
+      if( forward_all == false && forward_list==false){
+        forward_all = true;
+      }
+
+      if( in_coming == false && in_out==false && out_going==false){
+        in_out = true;
+      }
 
       setForwardUrl(forward_url);
       setSecretKey(secret_key);
