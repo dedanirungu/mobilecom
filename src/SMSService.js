@@ -95,8 +95,6 @@ class SMSService {
         var secret_key = await getFromStorage('secret_key');
         var select_sql = "SELECT * FROM smsin WHERE successful=0 OR successful is null";
 
-        console.log(select_sql);
-
         db.transaction(function (txn) {
 
             txn.executeSql(
@@ -108,16 +106,9 @@ class SMSService {
 
                         var tmp_item = res.rows.item(i);
 
-                        console.log(forward_url + "?secret_key=" + secret_key + "&action=post&phone=" + tmp_item.phone + "&sms=" + tmp_item.sms + "&date_sent=" + tmp_item.date_sent)
 
-                        axios.get(forward_url + "?secret_key=" + secret_key + "&action=post&phone=" + tmp_item.phone + "&sms=" + tmp_item.sms + "&date_sent=" + tmp_item.date_sent)
+                        axios.get(forward_url + "?secret_key=" + secret_key + "&action=post&phone=" + tmp_item.phone + "&sms=" + encodeURIComponent(tmp_item.sms) + "&date_sent=" + tmp_item.date_sent)
                             .then(result => {
-
-                                console.log('');
-                                console.log('result.data.successful');
-                                console.log(result.data.successful);
-                                console.log('');
-                                console.log('');
 
                                 if (result.data.successful) {
 

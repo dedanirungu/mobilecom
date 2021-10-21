@@ -109,7 +109,7 @@ function SMSIn(props) {
 
             {
             smsin_list.map((item, index) => (
-                <View id={index} style = {styles.itemWrapper}>
+                <View id={index} key={index} style = {styles.itemWrapper}>
 
                   <View style = {styles.item}>
                     <Text style = {styles.itemAmount}>{item.phone}</Text>
